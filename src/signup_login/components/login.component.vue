@@ -56,12 +56,14 @@ export default {
           <template #content>
             <div class="p-fluid">
               <div class="field">
-                <label for="username">Username</label>
-                <InputText id="username" v-model="username" />
+                <label for="username">E-mail or Phone Number</label>
+                <InputText id="username" v-model="username" placeholder="E-mail or Phone Number" />
               </div>
               <div class="field">
                 <label for="password">Password</label>
-                <Password id="password" v-model="password" toggleMask />
+                <Password id="password" v-model="password"
+                          toggleMask :feedback="false" placeholder="Enter your password"
+                           style="border: 1px black solid; border-radius: 4px " input-style="background:white; color: black; border: white;"/>
               </div>
               <Button
                   label="Login"
@@ -70,7 +72,7 @@ export default {
                   @click="login"
               />
 
-              <div align="center" class="p-mt-4">
+              <div align="center" class="p-mt-4 field2">
                 <span>or login with</span>
               </div>
 
@@ -94,6 +96,11 @@ export default {
                     @click="loginWithFacebook"
                 />
               </div>
+              <div align="center" class="p-mt-4 field2">
+                <span>Don't have an account?<br><br> <router-link to="/signup-customer">Sign Up for Customers</router-link>
+                  <br><br><router-link to="/signup-technician">Sign Up for Technicians</router-link></span>
+              </div>
+
             </div>
           </template>
         </Card>
@@ -202,17 +209,33 @@ export default {
   .field{
     display: flex;
     flex-direction: column;
-    margin-top: 7rem;
+    margin-top: 4rem;
+    margin-bottom: 7rem;
   }
 
+  #username{
+    width: 400px;
+    background-color: white;
+  }
+
+  #password{
+    width: 400px;
+    background-color: white;
+  }
+
+
+  .field2{
+    margin-top: 3rem;
+  }
   .login-card{
-    height: 800px;
+    height: 850px;
     width: 600px;
     color: #1a252f;
     background-color: white;
     overflow: hidden;
   }
   .social-buttons {
+    margin-top: 2rem;
     display: flex;
     justify-content: space-between;
     gap: 0.5rem;

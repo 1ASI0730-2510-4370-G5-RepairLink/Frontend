@@ -7,7 +7,6 @@ import App from './App.vue'
 import {
     Button,
     Card,
-    Checkbox,
     Column,
     ConfirmationService,
     ConfirmDialog,
@@ -34,6 +33,7 @@ import {
 } from "primevue";
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
+import Checkbox from 'primevue/checkbox';
 
 const app = createApp(App);
 //Router
