@@ -1,47 +1,65 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+<script>
+import menubar from '@/customer/pages/menubar.component.vue'
+import ServiceList from "@/customer/components/service-list.component.vue";
+import BookingForm from "@/customer/components/booking-form.component.vue";
+import ToastNotification from "@/customer/components/toast-Notification.component.vue";
+import ServiceHistory from "@/customer/components/service-history.component.vue";
+import ScheduledServices from "@/customer/components/schedule-services.component.vue";
+
+export default {
+  components: {ServiceHistory, ToastNotification, BookingForm, ServiceList, menubar, ScheduledServices},
+  data(){
+    return {
+      bookingVisible: false,
+    };
+  },
+  methods: {
+    openBooking(service) {
+      this.bookingVisible = true;
+    },
+    confirmBooking(data) {
+      this.$refs.toast.showSuccess(`Reserva confirmada para ${data.name} el ${data.date}`);
+      this.bookingVisible = false;
+    },
+  },
+}
+
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <div class="page-container">
+    <menubar class="menubar"/>
+    <div class="content-wrapper">
+      <service-list @openBooking="openBooking"/>
+      <BookingForm :visible="bookingVisible" @confirm="confirmBooking"/>
+      <ToastNotification ref="toast" />
+      <ServiceHistory />
+      <ScheduledServices/>
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
+.page-container {
+  background-color: #FFD38F;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.content-wrapper {
+  background-color: #FFFFFF;
+  padding: 10px;
+  border-radius: 8px;
+  width: 70%;
+
+}
+.menubar {
+  position: fixed;
+  left: 10px;
+  width: 250px;
+  height: 10vh;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
 </style>

@@ -1,0 +1,38 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "profesor1@eduflow.com",
+      "password": "hashed_password_1",
+      "type": "technician",
+      "name": "Juan Pérez",
+      "subject": "Handyman",
+      "experience": 5
+    },
+    {
+      "id": 2,
+      "email": "alumno1@eduflow.com",
+      "password": "hashed_password_2",
+      "type": "client",
+      "name": "María García",
+      "age":21
+    }
+  ],
+  "services": [
+    { "id": 1, "name": "Handyman", "description": "Reparaciones generales", "status": "Disponible", "image": "https://i.pinimg.com/736x/8d/7b/5c/8d7b5c42e7fd8eab0a1c966b85a7ba98.jpg" },
+    { "id": 2, "name": "Home Appliances", "description": "Reparación de electrodomésticos", "status": "Disponible", "image": "https://i.pinimg.com/736x/63/21/04/632104b4eba3df260577a6b32dca8e0a.jpg" },
+    { "id": 3, "name": "TV Mount", "description": "Instalación y configuración", "status": "Reservado", "image": "https://media.istockphoto.com/id/1174798682/es/vector/hombre-isom%C3%A9trico-vectorial-en-la-instalaci%C3%B3n-de-tv.jpg?s=612x612&w=0&k=20&c=r40PrkzxAbikcn2UW-wMWSer8J2yTov1OsCbmo3A2t0=" },
+    { "id": 4, "name": "Plumbing", "description": "Reparación de tuberías", "status": "Disponible", "image": "https://i.pinimg.com/736x/92/2e/19/922e191963a040a7b53203d42ebba446.jpg" },
+    { "id": 5, "name": "Electricidad", "description": "Instalaciones eléctricas", "status": "Disponible", "image": "https://media.istockphoto.com/id/1371990418/es/vector/electricistas-profesionales-en-el-trabajo-concepto-abstracto.jpg?s=612x612&w=0&k=20&c=vDSH3QS7t4oUyX8Y5UimQSORRUzIdHOxoKDcMAldODU=" },
+    { "id": 6, "name": "Jardinería", "description": "Mantenimiento de jardines", "status": "Disponible", "image": "https://img.freepik.com/vector-premium/dibujos-animados-personajes-jardinero-mujer-joven-trabajando-jardineria-jardin_212168-1277.jpg" }
+  ],
+  "serviceHistory": [
+    { "id": 1, "name": "Handyman", "date": "2025-05-10", "status": "Cancelado" },
+    { "id": 2, "name": "Fontanería", "date": "2025-04-28", "status": "En proceso" },
+    { "id": 3, "name": "Montaje de TV", "date": "2025-04-15", "status": "Completado" }
+  ],
+  "scheduledServices": [
+    { "id": 1, "name": "Electricidad", "date": "2025-05-20" },
+    { "id": 2, "name": "Jardinería", "date": "2025-06-05" }
+  ]
+}
