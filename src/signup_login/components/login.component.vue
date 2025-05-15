@@ -4,6 +4,8 @@ import InputText from 'primevue/inputtext'
 import Password from 'primevue/password'
 import Button from 'primevue/button'
 import Card from 'primevue/card'
+import {useToast} from "primevue";
+import axios from "axios";
 
 export default {
     name: 'LoginPage',
@@ -11,7 +13,7 @@ export default {
       InputText,
       Password,
       Button,
-      Card
+      Card,
     },
     data(){
         return{
@@ -19,9 +21,48 @@ export default {
           password: '',
         }
     },
+    setup(){
+      const toast= useToast()
+      return {toast}
+    },
     methods:{
-      login() {
-        console.log('Logging in with', username.value, password.value)
+      async handlelogin() {
+        try {
+          const response = await fetch('https://fakeapi-24rk.onrender.com/users')
+          const users = await response.json();
+
+          const user = users.find(
+              u => (u.email === this.username || u.name === this.username) && u.password === this.password
+          )
+
+          if (user) {
+            this.toast.add({
+              severity: 'success',
+              summary: 'Login successfully',
+              detail: `Welcome, ${user.name}`,
+              life: 3000,
+            })
+
+            setTimeout(()=>{
+              this.$router.push('/')
+            }, 1000)
+          } else {
+            this.toast.add({
+              severity: 'error',
+              summary: 'Login failed',
+              detail: `Invalid email or password`,
+              life: 3000,
+            })
+          }
+        }catch (error){
+          this.toast.add({
+            severity: 'error',
+            summary: 'API error',
+            detail: `Could not connect to the server. Please try again`,
+            life: 3000,
+          })
+          console.error(error)
+        }
       },
 
       loginWithGoogle(){
@@ -44,6 +85,8 @@ export default {
 </script>
 
 <template>
+  <Toast/>
+
   <div class="login-container">
     <div class="logo-container">
       <h1>RepairLink</h1>
@@ -69,7 +112,7 @@ export default {
                   label="Login"
                   icon="pi pi-sign-in"
                   class="p-button-primary p-mt-3"
-                  @click="login"
+                  @click="handlelogin"
               />
 
               <div align="center" class="p-mt-4 field2">
