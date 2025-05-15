@@ -28,10 +28,10 @@ export default {
       </div>
       <ul class="menu-list" style="color: peachpuff">
         <router-link to=""></router-link>
-        <li><router-link to="#" style="color: black;font-family: 'Roboto', sans-serif">Inicio</router-link></li>
-        <li><router-link to="#" style="color: black;font-family: 'Roboto', sans-serif">Mis Servicios</router-link></li>
-        <li><router-link to="#" style="color: black;font-family: 'Roboto', sans-serif">Perfil</router-link></li>
-        <li><router-link to="#" style="color: black;font-family: 'Roboto', sans-serif">Notificaciones</router-link></li>
+        <li><router-link to="/home" style="color: black;font-family: 'Roboto', sans-serif">Home</router-link></li>
+        <li><router-link to="my-services" style="color: black;font-family: 'Roboto', sans-serif">My Services</router-link></li>
+        <li><router-link to="/profile" style="color: black;font-family: 'Roboto', sans-serif">Profile</router-link></li>
+        <li><router-link to="#" style="color: black;font-family: 'Roboto', sans-serif">Help</router-link></li>
       </ul>
     </pv-drawer>
   </div>
