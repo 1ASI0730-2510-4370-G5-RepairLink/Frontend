@@ -40,7 +40,13 @@ const app = createApp(App);
 app.use(router);
 
 // PrimeVue
-app.use(PrimeVue, { theme: { preset: Material }, ripple: true })
+app.use(PrimeVue, { theme: { preset: Material,
+        options:{
+         dark:false,
+            colors:{
+             surface:'#FFD38F'
+            }
+        }}, ripple: true })
     .use(ConfirmationService)
     .use(DialogService)
     .use(ToastService)

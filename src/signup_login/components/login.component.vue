@@ -44,7 +44,7 @@ export default {
             })
 
             setTimeout(()=>{
-              this.$router.push('/')
+              this.$router.push('/my-services')
             }, 1000)
           } else {
             this.toast.add({
@@ -168,7 +168,6 @@ export default {
 
 
   .logo-container {
-
     background-color: peachpuff;
     width: 50vw;
     height: 100vh;
