@@ -1,14 +1,14 @@
 
+import { defineConfig } from 'vite'
 
-import { createElementVNode as _createElementVNode, createStaticVNode as _createStaticVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from "vue"
 
-const _hoisted_1 = { class: "profile-container" }
-function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (_openBlock(), _createElementBlock("div", _hoisted_1, _cache[0] || (_cache[0] = [
-    _createStaticVNode("<div class=\"sidebar\" data-v-7ba5bd90><div class=\"logo\" data-v-7ba5bd90><img src=\"https://raw.githubusercontent.com/1ASI0730-2510-4370-G5-RepairLink/Report/feature/chapter1/images/logo-producto.png\" alt=\"RepairLink Logo\" class=\"logo-image\" data-v-7ba5bd90><span class=\"logo-text\" data-v-7ba5bd90>RepairLink</span></div><nav class=\"navigation\" data-v-7ba5bd90><ul data-v-7ba5bd90><li class=\"nav-item\" data-v-7ba5bd90><img src=\"https://via.placeholder.com/20/888/fff?Text=H\" alt=\"Home Icon\" class=\"nav-icon\" data-v-7ba5bd90><span data-v-7ba5bd90>Home</span></li><li class=\"nav-item\" data-v-7ba5bd90><img src=\"https://via.placeholder.com/20/888/fff?Text=S\" alt=\"My Services Icon\" class=\"nav-icon\" data-v-7ba5bd90><span data-v-7ba5bd90>My services</span></li><li class=\"nav-item active\" data-v-7ba5bd90><img src=\"https://via.placeholder.com/20/888/fff?Text=P\" alt=\"Profile Icon\" class=\"nav-icon\" data-v-7ba5bd90><span data-v-7ba5bd90>Profile</span></li><li class=\"nav-item\" data-v-7ba5bd90><img src=\"https://via.placeholder.com/20/888/fff?Text=Sup\" alt=\"Support Icon\" class=\"nav-icon\" data-v-7ba5bd90><span data-v-7ba5bd90>Support</span></li></ul></nav></div><div class=\"main-content\" data-v-7ba5bd90><div class=\"profile-header\" data-v-7ba5bd90><img src=\"https://via.placeholder.com/100/cccccc/fff?Text=User\" alt=\"Profile Picture\" class=\"profile-picture\" data-v-7ba5bd90></div><div class=\"personal-info\" data-v-7ba5bd90><h2 data-v-7ba5bd90>Personal information</h2><div class=\"info-item\" data-v-7ba5bd90><label for=\"name\" data-v-7ba5bd90>Name</label><input type=\"text\" id=\"name\" disabled placeholder=\"John Doe\" data-v-7ba5bd90></div><div class=\"info-item\" data-v-7ba5bd90><label for=\"email\" data-v-7ba5bd90>Email</label><input type=\"email\" id=\"email\" disabled placeholder=\"john.doe@example.com\" data-v-7ba5bd90></div></div><div class=\"saved-addresses\" data-v-7ba5bd90><div class=\"section-header\" data-v-7ba5bd90><h2 data-v-7ba5bd90>Saved Addresses</h2><button class=\"view-all-button\" data-v-7ba5bd90>Display all &gt;</button></div><div class=\"address-item\" data-v-7ba5bd90><label for=\"address1\" data-v-7ba5bd90>Address 1</label><input type=\"text\" id=\"address1\" disabled placeholder=\"123 Main St\" data-v-7ba5bd90></div></div><div class=\"payment-methods\" data-v-7ba5bd90><div class=\"section-header\" data-v-7ba5bd90><h2 data-v-7ba5bd90>Payment Methods</h2><button class=\"view-all-button\" data-v-7ba5bd90>See all addresses &gt;</button></div></div><div class=\"notification-preferences\" data-v-7ba5bd90><h2 data-v-7ba5bd90>Notification Preferences</h2></div></div>", 2)
-  ])))
-}
-__sfc__.render = render
-__sfc__.__scopeId = "data-v-7ba5bd90"
-__sfc__.__file = "src/App.vue"
-export default __sfc__
+export default defineConfig({
+ 
+  server: {
+    port: 3000,
+    open: true
+  },
+  build: {
+    outDir: 'dist'
+  }
+})
