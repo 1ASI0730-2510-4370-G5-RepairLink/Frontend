@@ -1,17 +1,16 @@
 <script>
 import { ref } from 'vue'
 import InputText from 'primevue/inputtext'
-import Password from 'primevue/password'
 import Button from 'primevue/button'
 import Card from 'primevue/card'
 import Checkbox from "primevue/checkbox";
+import {addMethod} from "yup";
 
 export default {
   name: 'SignUoPage-Customer',
   components: {
     Checkbox,
     InputText,
-    Password,
     Button,
     Card
   },
@@ -23,8 +22,66 @@ export default {
     }
   },
   methods:{
-    login() {
-      console.log('Logging in with', username.value, password.value)
+    async handleSignUp(){
+      if(!this.username || !this.password || !this.password){
+        this.$toast.add({
+          severity: 'warn',
+          summary: 'Missing fields',
+          detail: 'Please fill all fields',
+          life: 3000
+        });
+        return;
+      }
+      try{
+        //Check if user already exists
+        const check = await fetch(`https://fakeapi-24rk.onrender.com/users`)
+        const existingUsers= await  check.json();
+
+        /*if (existingUsers.length > 0){
+          this.$toast.add({
+            severity: 'error',
+            summary:'User already exists',
+            detail: 'Please enter new data',
+            life: 3000
+          });
+          return;
+        }*/
+
+        //Post new user
+        const response = await fetch(`https://fakeapi-24rk.onrender.com/users`,{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({
+            name: this.username,
+            email: this.email_phonenumber,
+            password: this.password,
+          })
+        });
+        const newUser =await response.json();
+
+        //Store in localStorage
+        localStorage.setItem('loggedUser', JSON.stringify(newUser));
+
+        //Emit event to parent (App.vue) to set user
+        //this.$emit('signup-success', newUser);
+
+        this.$toast.add({
+          severity: 'success',
+          summary: 'User created successfully',
+          detail: `Welcome ${newUser.name}!`,
+          life: 3000
+        });
+
+        this.$router.push('/my-services')
+
+      } catch (error) {
+        this.$toast.add({
+          severity: 'error',
+          summary: 'Something went wrong',
+          detail: 'Unable to register user',
+          life: 3000
+        })
+      }
     },
 
     loginWithGoogle(){
@@ -60,17 +117,23 @@ export default {
           <div class="p-fluid">
             <div class="field">
               <label for="username">Full name</label>
-              <InputText id="username" v-model="username" placeholder="Enter your full name" style="color: black" />
+              <InputText id="username"
+                         v-model="username"
+                         placeholder="Enter your full name"
+                         style="color: black" />
             </div>
             <div class="field">
               <label for="email-phonenumber">E-mail or Phone Number</label>
-              <InputText id="username" v-model="email_phonenumber" placeholder="E-mail or Phone Number" style="color: black"/>
+              <InputText id="email_phonenumber"
+                         v-model="email_phonenumber"
+                         placeholder="E-mail or Phone Number"
+                         style=" color: black; background-color: white; width: 73%" />
             </div>
             <div class="field">
               <label for="password">Password</label>
-              <Password id="password" v-model="password"
-                        toggleMask :feedback="false" placeholder="Enter your password"
-                        style="border: 1px black solid; border-radius: 4px " input-style="background:white; color: black; border: white;"/>
+              <InputText id="password" v-model="password"
+                        toggleMask :feedback="false" placeholder="Enter your password" type="password"
+                        style="border: 1px black solid; border-radius: 4px ; color: black" input-style="background:white; color: black; border: white;"/>
             </div>
             <div class="field-checkbox p-mt-2">
               <Checkbox id="rememberMe" :binary="true" style="border: 1px black; border-radius: 4px; background-color: white" />
@@ -80,7 +143,7 @@ export default {
                 label="Sign Up"
                 icon="pi pi-sign-in"
                 class="p-button-primary p-mt-3"
-                @click="login"
+                @click="handleSignUp"
             />
 
             <div align="center" class="p-mt-4 field2">

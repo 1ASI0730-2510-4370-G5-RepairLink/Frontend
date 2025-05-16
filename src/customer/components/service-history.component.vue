@@ -3,14 +3,26 @@ export default {
   name: "service-history",
   data() {
     return {
-      serviceHistory: [],
+      users: {
+        serviceHistory: [],
+      }
     };
   },
   mounted() {
-    fetch('https://fakeapi-24rk.onrender.com/serviceHistory')
+    const userID = JSON.parse(localStorage.getItem('loggedUser'));
+        fetch('https://fakeapi-24rk.onrender.com/users')
         .then(res => res.json())
         .then(data => {
-          this.serviceHistory = data;
+          const user =data.find(user => user.id=== userID.id )
+
+          if (user) {
+            // If user found, assign their service history
+            this.users.serviceHistory = user.serviceHistory;
+          } else {
+            // Handle case where user isn't found
+            console.error('User not found');
+            this.users.serviceHistory = [];
+          }
         });
   }
 }
@@ -19,13 +31,11 @@ export default {
 <template>
   <div class="history-container">
     <h2>Historial de Servicios</h2>
-    <pv-data-table :value="serviceHistory" tableStyle="min-width: 50rem">
+    <pv-data-table :value="users.serviceHistory" tableStyle="min-width: 50rem">
       <pv-column field="name" header="Servicio"></pv-column>
       <pv-column field="date" header="Fecha"></pv-column>
       <pv-column field="status" header="Estado">
-        <template #body="{ data }">
-          <pv-tag :value="data.status" />
-        </template>
+
       </pv-column>
     </pv-data-table>
   </div>

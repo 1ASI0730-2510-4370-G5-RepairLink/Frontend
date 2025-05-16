@@ -36,12 +36,16 @@ export default {
           )
 
           if (user) {
+            this.$emit('login-success', user);
             this.toast.add({
               severity: 'success',
               summary: 'Login successfully',
               detail: `Welcome, ${user.name}`,
               life: 3000,
-            })
+            });
+
+            // Store in localStorage
+            localStorage.setItem('loggedUser', JSON.stringify(user));
 
             setTimeout(()=>{
               this.$router.push('/my-services')
@@ -100,13 +104,13 @@ export default {
             <div class="p-fluid">
               <div class="field">
                 <label for="username">E-mail or Phone Number</label>
-                <InputText id="username" v-model="username" placeholder="E-mail or Phone Number" />
+                <InputText id="username" v-model="username" placeholder="E-mail or Phone Number" style="color: black"/>
               </div>
               <div class="field">
                 <label for="password">Password</label>
-                <Password id="password" v-model="password"
-                          toggleMask :feedback="false" placeholder="Enter your password"
-                           style="border: 1px black solid; border-radius: 4px " input-style="background:white; color: black; border: white;"/>
+                <InputText id="password" v-model="password"
+                           placeholder="Enter your password" type="password"
+                           style="color:black ;border: 1px black solid; border-radius: 4px " input-style="background:white; color: black; border: white;"/>
               </div>
               <Button
                   label="Login"

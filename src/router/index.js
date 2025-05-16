@@ -5,6 +5,7 @@ import SignupCustomerComponent from "@/signup_login/components/signup-customer.c
 import SignupTechnicianComponent from "@/signup_login/components/signup-technician.component.vue";
 import signupTechinicianNextStepComponent from "@/signup_login/components/signup-techinician-next-step.component.vue";
 import myServicesComponent from "@/customer/components/my-services.component.vue";
+import ProfileComponent from "@/profile/components/profile.component.vue";
 
 /**
  * Vue Router instance
@@ -22,7 +23,8 @@ const router =createRouter({
         {path: '/signup-customer', name:'SignUpPage-Customer', component: SignupCustomerComponent},
         {path: '/signup-technician', name:'SignUpPage-Technician', component: SignupTechnicianComponent},
         {path: '/next-step', name:'SignUpPage-Technician-Next-Step', component:signupTechinicianNextStepComponent},
-        {path:'/my-services', name:'MyServicesPage', component:myServicesComponent}
+        {path:'/my-services', name:'MyServicesPage', component:myServicesComponent},
+        {path:'/profile', name:'ProfilePage', component:ProfileComponent}
     ]
 })
 

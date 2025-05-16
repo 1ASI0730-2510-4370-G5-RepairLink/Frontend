@@ -5,14 +5,26 @@ export default {
   components: {PvCalendar},
   data() {
     return {
-      scheduledServices: [],
+      users: {
+        scheduledServices: [],
+      }
     };
   },
   mounted() {
-    fetch('https://fakeapi-24rk.onrender.com/scheduledServices')
+    const userID = JSON.parse(localStorage.getItem('loggedUser'));
+    fetch('https://fakeapi-24rk.onrender.com/users')
         .then(res => res.json())
         .then(data => {
-          this.scheduledServices = data;
+          const user =data.find(user => user.id=== userID.id )
+
+          if (user) {
+            // If user found, assign their service history
+            this.users.scheduledServices = user.scheduledServices;
+          } else {
+            // Handle case where user isn't found
+            console.error('User not found');
+            this.users.serviceHistory = [];
+          }
         });
   }
 }
@@ -21,13 +33,9 @@ export default {
 <template>
   <div class="scheduled-container">
     <h2>Servicios Programados</h2>
-    <pv-data-table :value="scheduledServices" tableStyle="background-color: #F0F0F0; min-width: 50rem;">
+    <pv-data-table :value="users.scheduledServices" tableStyle="background-color: #F0F0F0; min-width: 50rem;">
       <pv-column field="name" header="Servicio"></pv-column>
-      <pv-column header="Fecha Programada">
-        <template #body="{ data }">
-          <pv-calendar v-model="data.date" dateFormat="dd/mm/yy" />
-        </template>
-      </pv-column>
+      <pv-column field="date" header="Fecha"></pv-column>
       <pv-column header="Estado">
         <template #body>
           <pv-tag value="Esperando" class="waiting-tag" />

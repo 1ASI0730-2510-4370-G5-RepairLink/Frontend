@@ -5,23 +5,26 @@ import BookingForm from "@/customer/components/booking-form.component.vue";
 import ToastNotification from "@/customer/components/toast-Notification.component.vue";
 import ServiceHistory from "@/customer/components/service-history.component.vue";
 import ScheduledServices from "@/customer/components/schedule-services.component.vue";
+import {Avatar} from "primevue";
 
 export default {
-  name: "my-services-page",
-  components: {ServiceHistory, ToastNotification, BookingForm, ServiceList, menubar, ScheduledServices},
+  name: "MyProfilePage",
+  components: {
+    ToastNotification,
+    menubar,
+    Avatar
+  },
   data(){
     return {
-      bookingVisible: false,
+      user: JSON.parse(localStorage.getItem('loggedUser')),
+      bookingVisible: false
     };
   },
   methods: {
-    openBooking(service) {
-      this.bookingVisible = true;
-    },
-    confirmBooking(data) {
-      this.$refs.toast.showSuccess(`Reserva confirmada para ${data.name} el ${data.date}`);
-      this.bookingVisible = false;
-    },
+   logout(){
+     localStorage.removeItem('loggedUser');
+     this.$router.push('/login');
+   }
   },
 }
 
@@ -31,7 +34,13 @@ export default {
   <div class="page-container">
     <menubar class="menubar"/>
     <div class="content-wrapper">
-
+      <Avatar icon="pi pi-user" class="mr-2" size="xlarge"  />
+      <h2 style="color: black">User Dashboard</h2>
+      <p style="color: black"><strong>Name:</strong> {{ user.name }}</p>
+      <p style="color: black"><strong>Email:</strong> {{ user.email }}</p>
+      <Button label="Logout"
+              @click="logout" class="mt-3"
+              style="height: 40px; width: 100px; color: white; border-radius: 20px 20px 20px 20px"> Log Out</Button>
     </div>
   </div>
 </template>
