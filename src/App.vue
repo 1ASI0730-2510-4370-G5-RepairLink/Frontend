@@ -1,47 +1,46 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <div class="page-container">
+    <menubar class="menubar" />
+    <div class="content-wrapper">
+      <router-view />
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  </div>
 </template>
 
+<script>
+import menubar from '@/shared/components/menubar.component.vue';
+import LanguageSwitcher from "@/public/components/language-switcher.component.vue";
+import FooterContent from "@/public/components/footer-content.component.vue";
+import MyServices from "@/serviceCatalog/components/my-services.component.vue";
+
+export default {
+  components: { LanguageSwitcher, FooterContent, menubar, MyServices },
+  data() {
+    return {
+    };
+  },
+  methods: {}
+};
+</script>
+
 <style scoped>
-header {
-  line-height: 1.5;
+.page-container {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.menubar {
+  width: 250px;
+  height: 100vh;
+  position: relative;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.content-wrapper {
+  background-color: #FFFFFF;
+  padding: 20px;
+  border-radius: 8px;
+  flex: 1;
+  overflow-y: auto;
 }
 </style>

@@ -1,0 +1,151 @@
+{
+  "users": [
+    {
+      "id": "1a2b3c4d-0000-1111-2222-333344445555",
+      "name": "Juan Pérez",
+      "email": "juan.perez@example.com",
+      "password_hash": "hashedpassword123",
+      "role": "customer",
+      "address_id": "addr-1111-2222-3333-4444"
+    },
+    {
+      "id": "2b3c4d5e-1111-2222-3333-444455556666",
+      "name": "Ana Gómez",
+      "email": "ana.gomez@example.com",
+      "password_hash": "hashedpassword456",
+      "role": "technician",
+      "address_id": "addr-5555-6666-7777-8888"
+    }
+  ],
+  "addresses": [
+    {
+      "id": "addr-1111-2222-3333-4444",
+      "street": "Av. Las Flores 123",
+      "city": "Lima",
+      "zip_code": "15001",
+      "lat": -12.046374,
+      "lng": -77.042793
+    },
+    {
+      "id": "addr-5555-6666-7777-8888",
+      "street": "Jr. Los Olivos 456",
+      "city": "Lima",
+      "zip_code": "15002",
+      "lat": -12.043180,
+      "lng": -77.028240
+    }
+  ],
+  "services": [
+    {
+      "id": "service-1111-2222-3333-4444",
+      "name": "Limpieza de Aire Acondicionado",
+      "description": "Servicio completo de limpieza y mantenimiento.",
+      "type": "Handyman",
+      "base_price": 150.00
+    },
+    {
+      "id": "service-5555-6666-7777-8888",
+      "name": "Reparación de Lavadora",
+      "description": "Diagnóstico y reparación de lavadoras.",
+      "type": "Home Appliances",
+      "base_price": 200.00
+    }
+  ],
+  "bookings": [
+    {
+      "id": "booking-0001",
+      "customer_id": "1a2b3c4d-0000-1111-2222-333344445555",
+      "technician_id": "2b3c4d5e-1111-2222-3333-444455556666",
+      "service_id": "service-1111-2222-3333-4444",
+      "address_id": "addr-1111-2222-3333-4444",
+      "scheduled_time": "2025-06-01T10:00:00Z",
+      "name": "Reparación de Lavadora",
+      "description": "Diagnóstico y reparación de lavadoras.",
+      "type": "Home Appliances",
+      "status": "new",
+      "startTime": "2025-07-01T08:00:00Z",
+      "endTime": "2025-07-01T12:00:00Z"
+    },
+    {
+      "id": "booking-0002",
+      "customer_id": "1a2b3c4d-0000-1111-2222-333344445555",
+      "technician_id": "2b3c4d5e-1111-2222-3333-444455556666",
+      "service_id": "service-1111-2222-3333-4444",
+      "address_id": "addr-1111-2222-3333-4444",
+      "scheduled_time": "2025-08-01T10:00:00Z",
+      "name": "Reparación de Refrigeradora",
+      "description": "Diagnóstico y reparación de refrigeradoras.",
+      "type": "TV Mounting",
+      "status": "confirmed",
+      "startTime": "2025-08-01T08:00:00Z",
+      "endTime": "2025-08-01T12:00:00Z"
+    }
+  ],
+  "payments": [
+    {
+      "id": "payment-001",
+      "booking_id": "booking-0001",
+      "amount": 150.00,
+      "payment_method": "credit_card",
+      "status": "completed",
+      "timestamp": "2025-05-28T15:00:00Z"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "review-001",
+      "booking_id": "booking-0001",
+      "technician_id": "2b3c4d5e-1111-2222-3333-444455556666",
+      "customer_id": "1a2b3c4d-0000-1111-2222-333344445555",
+      "rating": 5,
+      "comments": "Servicio excelente y puntual.",
+      "created_at": "2025-06-02T12:00:00Z"
+    }
+  ],
+  "availability_days": [
+    {
+      "id": "availday-001",
+      "slot_id": "slot-001",
+      "day_of_week": "Monday"
+    },
+    {
+      "id": "availday-002",
+      "slot_id": "slot-002",
+      "day_of_week": "Wednesday"
+    }
+  ],
+  "availability_slots": [
+    {
+      "id": "slot-001",
+      "technician_id": "2b3c4d5e-1111-2222-3333-444455556666",
+      "start_time": "2025-06-01T08:00:00Z",
+      "end_time": "2025-06-01T12:00:00Z",
+      "is_recurring": true
+    },
+    {
+      "id": "slot-002",
+      "technician_id": "2b3c4d5e-1111-2222-3333-444455556666",
+      "start_time": "2025-06-03T14:00:00Z",
+      "end_time": "2025-06-03T18:00:00Z",
+      "is_recurring": false
+    }
+  ],
+  "notifications": [
+    {
+      "id": "notif-001",
+      "recipient_id": "1a2b3c4d-0000-1111-2222-333344445555",
+      "message": "Su cita ha sido confirmada para el 1 de junio a las 10 AM.",
+      "type": "booking_confirmation",
+      "status": "unread",
+      "created_at": "2025-05-25T09:00:00Z"
+    },
+    {
+      "id": "notif-002",
+      "recipient_id": "2b3c4d5e-1111-2222-3333-444455556666",
+      "message": "Tiene una nueva solicitud de servicio asignada.",
+      "type": "service_assignment",
+      "status": "read",
+      "created_at": "2025-05-26T10:00:00Z"
+    }
+  ]
+}
