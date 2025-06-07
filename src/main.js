@@ -1,9 +1,12 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import Material from '@primeuix/themes/material'
-import PrimeVue from 'primevue/config'
+import { createApp } from 'vue';
+import App from './App.vue';
+import Aura from '@primevue/themes/aura';
+import PrimeVue from 'primevue/config';
+import router from './router';
+
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
+
 import {
     Button,
     DatePicker,
@@ -16,13 +19,17 @@ import {
     Tag,
     Toast,
     DataView,
-    Drawer, ToastService
+    Drawer,
+    ToastService
 } from "primevue";
 
+const app = createApp(App);
 
-const app = createApp(App)
+app.use(PrimeVue, { theme: { preset: Aura }, ripple: true });
+app.use(router);
+app.use(ToastService);
 
-app.use(PrimeVue, {theme: { preset: Material }, ripple: true })
+app
     .component('pv-button', Button)
     .component('pv-card', Card)
     .component('pv-data-table', DataTable)
@@ -35,7 +42,6 @@ app.use(PrimeVue, {theme: { preset: Material }, ripple: true })
     .component('pv-tag', Tag)
     .component('pv-column', Column)
     .component('pv-data-view', DataView)
+    .component('Toast', Toast);
 
 app.mount('#app');
-app.use(ToastService); // Register ToastService
-app.component('Toast', Toast);
