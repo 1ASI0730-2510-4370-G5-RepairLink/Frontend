@@ -4,6 +4,9 @@
  */
 
 import {createRouter, createWebHistory} from "vue-router";
+import signupCustomerComponent from "@/userManagement/pages/signup-customer.component.vue";
+import SignupCustomerComponent from "@/userManagement/pages/signup-customer.component.vue";
+import SignupTechinicianNextStepComponent from "@/userManagement/pages/signup-techinician-next-step.component.vue";
 
 /**
  * @description Lazy-loaded component imports for route configuration
@@ -13,6 +16,11 @@ import {createRouter, createWebHistory} from "vue-router";
 const HomeComponent = () => import('../public/pages/home.component.vue');
 const PageNotFoundComponent = () => import('../public/pages/page-not-found.component.vue');
 const BookingDetailsComponent = () => import('../booking/pages/booking-details.component.vue');
+const MyServicesComponent = () => import('../serviceCatalog/pages/my-services.component.vue');
+const ProfileComponent = () => import('../userManagement/pages/profile.component.vue');
+const NotificationsComponent = () => import('../notification/pages/notifications.component.vue');
+const WelcomeComponent = () => import('../userManagement/pages/welcome.component.vue');
+const LoginComponent = () => import('../userManagement/pages/login.component.vue');
 
 /**
  * @type {import('vue-router').RouteRecordRaw[]}
@@ -24,9 +32,16 @@ const BookingDetailsComponent = () => import('../booking/pages/booking-details.c
  * - meta: Additional metadata including page title
  */
 const routes = [
+    {   path: '/welcome',                  name: 'welcome',       component: WelcomeComponent,               meta: {title: 'Welcome'}},
+    {   path: '/login',                  name: 'login',       component: LoginComponent,               meta: {title: 'Login'}},
+    {   path: '/signup-customer',                  name: 'signup-customer',       component: signupCustomerComponent,               meta: {title: 'SignUpCustomer'}},
+    {   path: '/signup-technician',                  name: 'signup-technician',       component: SignupTechinicianNextStepComponent,               meta: {title: 'SignUpTechnician'}},
     {   path: '/home',                  name: 'home',       component: HomeComponent,               meta: {title: 'Home'}},
     {   path: '/booking/:id',           name: 'booking-details',       component: BookingDetailsComponent, props: true,  meta: {title: 'Booking Details'}},
-    {   path: '/',                      name: 'default',    redirect: {name: 'home'}},
+    {   path: '/profile',                  name: 'profile',       component: ProfileComponent,               meta: {title: 'Profile'}},
+    {   path: '/my-services',                  name: 'my-services',       component: MyServicesComponent,               meta: {title: 'My Services'}},
+    {   path: '/notifications',                  name: 'notifications',       component: NotificationsComponent,               meta: {title: 'Notifications'}},
+    {   path: '/',                      name: 'default',    redirect: {name: 'welcome'}},
     {   path: '/:pathMatch(.*)*',       name: 'not-found',  component: PageNotFoundComponent,       meta: {title: 'Page not found'}},
 ]
 

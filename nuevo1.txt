@@ -20,38 +20,11 @@
       "role": "technician",
       "address_id": "addr-5555-6666-7777-8888",
       "specialty": "Plomería",
-      "skills": [
-        "Fontanería",
-        "Reparación de grifos"
-      ],
+      "skills": ["Fontanería", "Reparación de grifos"],
       "background_check": false,
       "documents": [
         "cv_ana_gomez.pdf"
       ]
-    },
-    {
-      "id": "3",
-      "name": "Pilar Chaparro",
-      "email": "pilar.chaparro@example.com",
-      "password": "hashedpassword123",
-      "role": "customer",
-      "address_id": "",
-      "specialty": "-",
-      "skills": [],
-      "background_check": true,
-      "documents": []
-    },
-    {
-      "id": "4",
-      "name": "Karen Ramos",
-      "email": "karen.ramos@gmail.com",
-      "password": "Krenxu125",
-      "role": "customer",
-      "address_id": "addr-c10b2290-3c7c-40c9-9b8b-1d4e729bc66a",
-      "specialty": "-",
-      "skills": [],
-      "background_check": true,
-      "documents": []
     }
   ],
   "addresses": [
@@ -68,8 +41,8 @@
       "street": "Jr. Los Olivos 456",
       "city": "Lima",
       "zip_code": "15002",
-      "lat": -12.04318,
-      "lng": -77.02824
+      "lat": -12.043180,
+      "lng": -77.028240
     }
   ],
   "services": [
@@ -78,14 +51,14 @@
       "name": "Limpieza de Aire Acondicionado",
       "description": "Servicio completo de limpieza y mantenimiento.",
       "type": "Handyman",
-      "base_price": 150
+      "base_price": 150.00
     },
     {
       "id": "02",
       "name": "Reparación de Lavadora",
       "description": "Diagnóstico y reparación de lavadoras.",
       "type": "Home Appliances",
-      "base_price": 200
+      "base_price": 200.00
     }
   ],
   "bookings": [
@@ -122,7 +95,7 @@
     {
       "id": "payment-001",
       "booking_id": "booking-0001",
-      "amount": 150,
+      "amount": 150.00,
       "payment_method": "credit_card",
       "status": "completed",
       "timestamp": "2025-05-28T15:00:00Z"

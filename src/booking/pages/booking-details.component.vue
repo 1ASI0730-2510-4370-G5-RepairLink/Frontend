@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter} from 'vue-router';
 import { BookingService } from '@/booking/services/booking.service.js';
 
 const route = useRoute();
+const router = useRouter()
 const booking = ref(null);
 const bookingService = new BookingService();
 
@@ -11,6 +12,7 @@ onMounted(() => {
   const id = route.params.id;
   bookingService.getById(id)
       .then(response => {
+
         if (response && typeof response.data === 'object') {
           booking.value = response.data;
         } else {
@@ -22,22 +24,50 @@ onMounted(() => {
         console.error('Error cargando booking:', error);
       });
 });
+function goHome() {
+  router.push({ name: 'home' });
+}
+
+function formatDateRange(startISO: string, endISO: string): { formattedDate: string, duration: string } {
+  const optionsDate: Intl.DateTimeFormatOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };
+  const optionsTime: Intl.DateTimeFormatOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
+
+  const startDate = new Date(startISO);
+  const endDate = new Date(endISO);
+
+  const dateStr = startDate.toLocaleDateString('en-GB', optionsDate);
+
+  const startTimeStr = startDate.toLocaleTimeString('en-GB', optionsTime);
+  const endTimeStr = endDate.toLocaleTimeString('en-GB', optionsTime);
+
+  const durationInMillis = endDate.getTime() - startDate.getTime();
+  const durationInHours = Math.floor(durationInMillis / (1000 * 60 * 60));
+  const durationInMinutes = Math.floor((durationInMillis % (1000 * 60 * 60)) / (1000 * 60));
+
+  const durationStr = `${durationInHours} horas ${durationInMinutes} minutos`;
+
+  return {
+    formattedDate: `${dateStr} ${startTimeStr} - ${endTimeStr} hrs`,
+    duration: durationStr,
+  };
+}
+
 
 </script>
 
 <template>
   <div class="container">
     <main class="details">
-      <button class="close-btn">×</button>
+      <button class="close-btn" @click="goHome">×</button>
 
       <h2>Appointment Details</h2>
 
       <section>
         <h3>Information</h3>
-        <p><strong>Date and Time:</strong> {{ booking?.date || 'Loading...' }}</p>
-        <p><strong>Duration:</strong> {{ booking?.duration || '-' }}</p>
+        <p><strong>Date and Time:</strong> {{ booking ? formatDateRange(booking.startTime, booking.endTime).formattedDate : 'Loading...' }}</p>
+        <p><strong>Duration:</strong> {{ booking ? formatDateRange(booking.startTime, booking.endTime).duration : 'Loading...' }}</p>
         <p><strong>Service Type:</strong> {{ booking?.type || '-' }}</p>
-        <p><strong>Status:</strong> {{ booking?.type || '-' }}</p>
+        <p><strong>Status:</strong> {{ booking?.status || '-' }}</p>
         <p><strong>Address:</strong> {{ booking?.address || '-' }}</p>
       </section>
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import heroImage from '@/assets/hero.png';
+import heroImageTech from '@/assets/heroTech.png';
 import daleImage from '@/assets/dale.png';
 import {BookingService}  from "@/booking/services/booking.service.js";
 import {Booking} from "@/booking/model/booking.entity.js";
@@ -34,11 +34,35 @@ function formatDateRange(startISO: string, endISO: string): string {
   const startDate = new Date(startISO);
   const endDate = new Date(endISO);
 
-  const dateStr = startDate.toLocaleDateString('en-US', optionsDate).toUpperCase(); // "AUG 01, 2025"
+  const dateStr = startDate.toLocaleDateString('en-US', optionsDate).toUpperCase();
   const startTimeStr = startDate.toLocaleTimeString('en-US', optionsTime);
   const endTimeStr = endDate.toLocaleTimeString('en-US', optionsTime);
 
   return `${dateStr} ${startTimeStr} - ${endTimeStr}`;
+}
+
+function formatTimeRange(startISO: string, endISO: string): { formattedDate: string, duration: string } {
+  const optionsDate: Intl.DateTimeFormatOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };
+  const optionsTime: Intl.DateTimeFormatOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
+
+  const startDate = new Date(startISO);
+  const endDate = new Date(endISO);
+
+  const dateStr = startDate.toLocaleDateString('en-GB', optionsDate);
+
+  const startTimeStr = startDate.toLocaleTimeString('en-GB', optionsTime);
+  const endTimeStr = endDate.toLocaleTimeString('en-GB', optionsTime);
+
+  const durationInMillis = endDate.getTime() - startDate.getTime();
+  const durationInHours = Math.floor(durationInMillis / (1000 * 60 * 60));
+  const durationInMinutes = Math.floor((durationInMillis % (1000 * 60 * 60)) / (1000 * 60));
+
+  const durationStr = `${durationInHours} horas ${durationInMinutes} minutos`;
+
+  return {
+    formattedDate: `${dateStr} ${startTimeStr} - ${endTimeStr} hrs`,
+    duration: durationStr,
+  };
 }
 
 const selectedBooking = ref<Booking | null>(null);
@@ -62,7 +86,7 @@ function closeDetail() {
     </div>
 
     <div style="text-align: center; margin-bottom: 20px;">
-      <img :src="heroImage" alt="service" style="width: 220px; height: 220px;" />
+      <img :src="heroImageTech" alt="service" style="width: 220px; height: 220px;" />
     </div>
 
     <div style="color: #9abaff; font-weight: 600; margin-bottom: 15px;">

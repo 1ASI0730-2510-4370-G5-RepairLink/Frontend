@@ -1,11 +1,13 @@
 <script>
-import { ref } from 'vue'
-import InputText from 'primevue/inputtext'
-import Password from 'primevue/password'
-import Button from 'primevue/button'
-import Card from 'primevue/card'
-import {useToast} from "primevue";
-import axios from "axios";
+import { onMounted, ref } from 'vue';
+import { useToast } from "primevue";
+import InputText from 'primevue/inputtext';
+import Password from 'primevue/password';
+import Button from 'primevue/button';
+import Card from 'primevue/card';
+import { UserService } from '@/userManagement/services/user.service';
+import { useRoute, useRouter } from 'vue-router';
+import {Booking} from "@/booking/model/booking.entity.js";
 
 export default {
   name: 'LoginPage',
@@ -15,80 +17,81 @@ export default {
     Button,
     Card,
   },
-  data(){
-    return{
-      username: '',
-      password: '',
-    }
-  },
-  setup(){
-    const toast= useToast()
-    return {toast}
-  },
-  methods:{
-    async handlelogin() {
+  setup() {
+    const toast = useToast();
+    const route = useRoute();
+    const router = useRouter();
+    const email = ref('');
+    const password = ref('');
+    const user = ref(null);
+    const userService = new UserService();
+    const login = async () => {
       try {
-        const response = await fetch('https://fakeapi-24rk.onrender.com/users')
-        const users = await response.json();
+        const response = await userService.getByEmail(email.value);
+        const foundUsers = response.data;
 
-        const user = users.find(
-            u => (u.email === this.username || u.name === this.username) && u.password === this.password
-        )
+        if (foundUsers.length === 1) {
+          const user = foundUsers[0];
 
-        if (user) {
-          this.toast.add({
-            severity: 'success',
-            summary: 'Login successfully',
-            detail: `Welcome, ${user.name}`,
-            life: 3000,
-          })
+          if (user.password === password.value) {
+            toast.add({
+              severity: 'success',
+              summary: 'Login successful',
+              detail: `Welcome, ${user.name}`,
+              life: 3000,
+            });
 
-          setTimeout(()=>{
-            this.$router.push('/')
-          }, 1000)
+            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('userId', String(user.id));
+
+            setTimeout(() => {
+              router.push({ name: 'home' });
+            }, 1000);
+          } else {
+            toast.add({
+              severity: 'error',
+              summary: 'Login failed',
+              detail: 'Incorrect password',
+              life: 3000,
+            });
+          }
         } else {
-          this.toast.add({
+          toast.add({
             severity: 'error',
             summary: 'Login failed',
-            detail: `Invalid email or password`,
+            detail: 'User not found',
             life: 3000,
-          })
+          });
         }
-      }catch (error){
-        this.toast.add({
+      } catch (error) {
+        console.error("Login error:", error);
+        toast.add({
           severity: 'error',
-          summary: 'API error',
-          detail: `Could not connect to the server. Please try again`,
+          summary: 'Login failed',
+          detail: 'Server error',
           life: 3000,
-        })
-        console.error(error)
+        });
       }
-    },
+    };
 
-    loginWithGoogle(){
-      console.log('Google login triggered')
-      // Implement Google OAuth logic
-    },
+    return {
+      email,
+      password,
+      login,
+      toast,
+    };
+  },
+};
 
-    loginWithApple(){
-      console.log('Apple login triggered')
-      // Implement Apple login logic
-    },
 
-    loginWithFacebook() {
-      console.log('Facebook login triggered')
-      // Implement Facebook login
-    },
-
-  }
-}
 </script>
 
 <template>
-  <Toast/>
+  <Toast />
 
   <div class="login-container">
     <div class="logo-container">
+      <img src="/logo-producto.png" alt="Logo" class="logo" />
       <h1>RepairLink</h1>
       <p class="tagline">Your go-to home care experts</p>
     </div>
@@ -99,49 +102,34 @@ export default {
         <template #content>
           <div class="p-fluid">
             <div class="field">
-              <label for="username">E-mail or Phone Number</label>
-              <InputText id="username" v-model="username" placeholder="E-mail or Phone Number" />
+              <label for="username">E-mail</label>
+              <InputText id="username" v-model="email" placeholder="Enter your email" />
             </div>
             <div class="field">
               <label for="password">Password</label>
-              <Password id="password" v-model="password"
-                        toggleMask :feedback="false" placeholder="Enter your password"
-                        style="border: 1px black solid; border-radius: 4px " input-style="background:white; color: black; border: white;"/>
+              <Password
+                  id="password"
+                  v-model="password"
+                  toggleMask
+                  :feedback="false"
+                  placeholder="Enter your password"
+                  style="border: 1px black solid; border-radius: 4px"
+                  :input-style="{ background: 'white', color: 'black', border: 'white' }"
+              />
             </div>
             <Button
                 label="Login"
                 icon="pi pi-sign-in"
                 class="p-button-primary p-mt-3"
-                @click="handlelogin"
+                @click="login"
             />
-
-            <div align="center" class="p-mt-4 field2">
-              <span>or login with</span>
-            </div>
-
-            <div class="p-d-flex p-jc-between p-mt-3 social-buttons">
-              <Button
-                  label="Google"
-                  icon="pi pi-google"
-                  class="p-button-outlined google"
-                  @click="loginWithGoogle"
-              />
-              <Button
-                  label="Apple"
-                  icon="pi pi-apple"
-                  class="p-button-outlined apple"
-                  @click="loginWithApple"
-              />
-              <Button
-                  label="Facebook"
-                  icon="pi pi-facebook"
-                  class="p-button-outlined facebook"
-                  @click="loginWithFacebook"
-              />
-            </div>
-            <div align="center" class="p-mt-4 field2">
-                <span>Don't have an account?<br><br> <router-link to="/signup-customer">Sign Up for Customers</router-link>
-                  <br><br><router-link to="/signup-technician">Sign Up for Technicians</router-link></span>
+            <div class="signup-message">
+              <span>
+                Don't have an account?<br /><br />
+                <router-link to="/signup-customer">Sign Up for Customers</router-link>
+                <br /><br />
+                <router-link to="/signup-technician">Sign Up for Technicians</router-link>
+              </span>
             </div>
 
           </div>
@@ -218,7 +206,7 @@ export default {
 
 .logo-container {
 
-  background-color: peachpuff;
+  background-color: #FFD38F;
   width: 50vw;
   height: 100vh;
   display: flex;
@@ -252,8 +240,8 @@ export default {
 .field{
   display: flex;
   flex-direction: column;
-  margin-top: 4rem;
-  margin-bottom: 7rem;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 #username{
@@ -297,6 +285,23 @@ export default {
 .facebook {
   color: #4267B2;
   border-color: #4267B2;
+}
+.logo-container {
+  text-align: center;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  margin-bottom: 15px;
+}
+
+.logo {
+  max-width: 120px;
+  height: auto;
+  display: inline-block;
+}
+
+.signup-message {
+  margin-top: 2rem;
+  text-align: center;
 }
 
 </style>

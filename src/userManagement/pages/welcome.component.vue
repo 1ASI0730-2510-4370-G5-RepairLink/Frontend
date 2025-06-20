@@ -20,7 +20,8 @@ export default {
 <template>
   <div class="login-container">
     <div class="logo-container">
-      <h1>RepairLink</h1>
+      <img src="/logo-producto.png" alt="Logo" class="logo" />
+      <h1>Welcome to RepairLink</h1>
       <p class="tagline">Your go-to home care experts</p>
     </div>
 
@@ -57,7 +58,7 @@ export default {
 
 .logo-container {
 
-  background-color: peachpuff;
+  background-color: #FFD38F;
   width: 50vw;
   height: 100vh;
   display: flex;
@@ -68,13 +69,13 @@ export default {
 }
 
 .logo-container h1 {
-  color: #2c3e50;
+  color: #90b5ff;
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
 }
 
 .tagline {
-  color: #7f8c8d;
+  color: #90b5ff;
   font-size: 1.1rem;
 }
 
@@ -99,13 +100,13 @@ export default {
 
 .customer-button {
 
-  background-color: #42b983;
-  border: 1px solid #42b983;
+  background-color: #90b5ff;
+  border: 1px solid #90b5ff;
 }
 
 .customer-button:hover {
-  background-color: #3aa876;
-  border-color: #3aa876;
+  background-color: #90b5ff;
+  border-color: #90b5ff;
 }
 
 .technician-button {
@@ -115,7 +116,19 @@ export default {
 }
 
 .technician-button:hover {
-  background-color: #1a252f;
-  border-color: #1a252f;
+  background-color: #90b5ff;
+  border-color: #90b5ff;
+}
+.logo-container {
+  text-align: center;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  margin-bottom: 15px;
+}
+
+.logo {
+  max-width: 120px;
+  height: auto;
+  display: inline-block;
 }
 </style>

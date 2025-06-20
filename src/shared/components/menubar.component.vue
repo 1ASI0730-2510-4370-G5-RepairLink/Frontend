@@ -2,6 +2,7 @@
 import {Button as PvButton, Drawer as PvDrawer, Menu as PvMenu} from "primevue";
 import LanguageSwitcher from "@/public/components/language-switcher.component.vue";
 import FooterContent from "@/public/components/footer-content.component.vue";
+import { useRouter } from 'vue-router';
 
 export default {
   name: "menubar",
@@ -15,9 +16,22 @@ export default {
         { label: "Notificaciones", icon: "pi pi-info-circle" },
       ],
       visible: false,
-    }
+    };
+  },
+  setup() {
+    const router = useRouter();
+
+    const logout = () => {
+      localStorage.removeItem('user');
+      localStorage.removeItem('userId');
+      router.push({ name: 'welcome' });
+    };
+
+    return {
+      logout,
+    };
   }
-}
+};
 </script>
 
 <template>
@@ -27,10 +41,10 @@ export default {
       <img src="/logo-producto.png" alt="Logo" class="logo" />
     </div>
     <ul class="menu-list">
-      <li><a href="#"><i class="pi pi-home"></i> Inicio</a></li>
-      <li><a href="#"><i class="pi pi-list"></i> Mis Servicios</a></li>
-      <li><a href="#"><i class="pi pi-user"></i> Perfil</a></li>
-      <li><a href="#"><i class="pi pi-bell"></i> Notificaciones</a></li>
+      <li><router-link to="/home"><i class="pi pi-home"></i> Inicio</router-link></li>
+      <li><router-link to="/my-services"><i class="pi pi-list"></i> Mis Servicios</router-link></li>
+      <li><router-link to="/profile"><i class="pi pi-list"></i> Perfil</router-link></li>
+      <li><router-link to="/notifications"><i class="pi pi-list"></i>Notiicaciones</router-link></li>
       <hr class="menu-divider" />
       <li><a href="#" @click="logout"><i class="pi pi-sign-out"></i> Cerrar sesión</a></li>
     </ul>

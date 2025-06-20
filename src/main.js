@@ -75,3 +75,4 @@ app.use(PrimeVue, { theme: { preset: Material }, ripple: true })
 app.use(i18n);
 
 app.mount('#app')
+app.component('Toast', Toast);
