@@ -38,7 +38,7 @@ const addPaymentMethod = async () => {
         cardExpiry: cardExpiry.value,
         cardCvv: cardCvv.value,
         cardHolderName: cardHolderName.value,
-      }),
+      }),           
     });
 
     const data = await response.json();

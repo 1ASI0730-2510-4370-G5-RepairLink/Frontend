@@ -82,7 +82,7 @@ function closeDetail() {
 <template>
   <div style="font-family: Roboto, sans-serif; max-width: 900px; margin: auto; padding: 10px;">
     <div style="text-align: left; color: #9abaff; font-weight: 500; margin-bottom: 20px;">
-      Experts in solutions, dedicated to <br /> your satisfaction
+      Expertos en soluciones, dedicados a<br /> su satisfacción
     </div>
 
     <div style="text-align: center; margin-bottom: 20px;">
@@ -90,7 +90,7 @@ function closeDetail() {
     </div>
 
     <div style="color: #9abaff; font-weight: 600; margin-bottom: 15px;">
-      Services Assigned
+      Servicios Asinados
     </div>
 
     <div class="cards-container">
@@ -100,12 +100,12 @@ function closeDetail() {
           class="service-card"
       >
         <div class="header">
-          <span class="status">Appt. status {{ service.status }}</span>
+          <span class="status">Est. serv.: {{ service.status }}</span>
         </div>
 
         <h3 class="service-name">{{ service.type }}</h3>
 
-        <button class="btn-detail" @click="openDetail(service)">See Detail</button>
+        <button class="btn-detail" @click="openDetail(service)">Ver Detalles</button>
 
         <div class="footer">
           <span class="time">{{ formatDateRange(service.startTime, service.endTime) }}</span>

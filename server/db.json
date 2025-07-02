@@ -19,7 +19,7 @@
       "password": "hashedpassword456",
       "role": "technician",
       "address_id": "addr-5555-6666-7777-8888",
-      "specialty": "Plomería",
+      "specialty": "02",
       "skills": [
         "Fontanería",
         "Reparación de grifos"
@@ -47,11 +47,94 @@
       "email": "karen.ramos@gmail.com",
       "password": "Krenxu125",
       "role": "customer",
-      "address_id": "addr-c10b2290-3c7c-40c9-9b8b-1d4e729bc66a",
+      "address_id": "001",
       "specialty": "-",
       "skills": [],
       "background_check": true,
       "documents": []
+    },
+    {
+      "id": "5",
+      "name": "Jose Lopez",
+      "email": "jlopez@example.com",
+      "password": "hashedpassword456",
+      "role": "technician",
+      "address_id": "addr-5555-6666-7777-8888",
+      "specialty": "02",
+      "skills": [
+        "Fontanería",
+        "Reparación de grifos"
+      ],
+      "background_check": false,
+      "documents": [
+        "cv_j_lopez.pdf"
+      ]
+    },
+    {
+      "id": "6",
+      "name": "Jose Lopez",
+      "email": "jlopez@example.com",
+      "password": "hashedpassword456",
+      "role": "technician",
+      "address_id": "addr-5555-6666-7777-8888",
+      "specialty": "02",
+      "skills": [
+        "Fontanería",
+        "Reparación de grifos"
+      ],
+      "background_check": false,
+      "documents": [
+        "cv_j_lopez.pdf"
+      ]
+    },
+    {
+      "id": "7",
+      "name": "Jose Lopez",
+      "email": "jlopez@example.com",
+      "password": "hashedpassword456",
+      "role": "technician",
+      "address_id": "addr-5555-6666-7777-8888",
+      "specialty": "02",
+      "skills": [
+        "Fontanería",
+        "Reparación de grifos"
+      ],
+      "background_check": false,
+      "documents": [
+        "cv_j_lopez.pdf"
+      ]
+    },
+    {
+      "id": "8",
+      "name": "Jose Lopez",
+      "email": "jlopez@example.com",
+      "password": "hashedpassword456",
+      "role": "technician",
+      "address_id": "addr-5555-6666-7777-8888",
+      "specialty": "02",
+      "skills": [
+        "Fontanería",
+        "Reparación de grifos"
+      ],
+      "background_check": false,
+      "documents": [
+        "cv_j_lopez.pdf"
+      ]
+    },
+    {
+      "id": "9",
+      "name": "Guillermo Stark",
+      "email": "gstark@gmail.com",
+      "password": "123456",
+      "role": "technician",
+      "phone": "974276552",
+      "address_id": "-",
+      "specialty": "01",
+      "skills": [
+        "Plumbing"
+      ],
+      "background_check": false,
+      "documents": {}
     }
   ],
   "addresses": [
@@ -75,22 +158,57 @@
   "services": [
     {
       "id": "01",
-      "name": "Limpieza de Aire Acondicionado",
-      "description": "Servicio completo de limpieza y mantenimiento.",
-      "type": "Handyman",
-      "base_price": 150
+      "name": "Handyman",
+      "description": "Drywall repair, Intrior painting, Furniture assembly, General handyman services",
+      "base_price": 150,
+      "image": "https://i.pinimg.com/736x/8d/7b/5c/8d7b5c42e7fd8eab0a1c966b85a7ba98.jpg"
     },
     {
       "id": "02",
-      "name": "Reparación de Lavadora",
-      "description": "Diagnóstico y reparación de lavadoras.",
-      "type": "Home Appliances",
-      "base_price": 200
+      "name": "Home Appliances",
+      "description": "Refrigerator, Dryer, Oven, Washer, Dishwasher, Cooktop, Freezer",
+      "base_price": 200,
+      "image": "https://i.pinimg.com/736x/63/21/04/632104b4eba3df260577a6b32dca8e0a.jpg"
+    },
+    {
+      "id": "03",
+      "name": "TV Mounting",
+      "description": "Up to 31, 32-60, 61-80, Above 81",
+      "base_price": 200,
+      "image": "https://media.istockphoto.com/id/1174798682/es/vector/hombre-isom%C3%A9trico-vectorial-en-la-instalaci%C3%B3n-de-tv.jpg?s=612x612&w=0&k=20&c=r40PrkzxAbikcn2UW-wMWSer8J2yTov1OsCbmo3A2t0="
+    },
+    {
+      "id": "04",
+      "name": "Plumbing",
+      "description": "Bathroom, Drains, Kitchen, Laundry, Water heater, Water or gas line",
+      "base_price": 200,
+      "image": "https://i.pinimg.com/736x/92/2e/19/922e191963a040a7b53203d42ebba446.jpg"
+    },
+    {
+      "id": "05",
+      "name": "Garage door repair",
+      "description": "Cable replacement, Door replacement, Garage door opener repair",
+      "base_price": 200,
+      "image": "https://img.freepik.com/free-vector/guy-with-goatee-holding-garage-door-remote-vector_53876-17207.jpg"
+    },
+    {
+      "id": "06",
+      "name": "Smart home installation",
+      "description": "Smart security camera, Video doorbell, Thermostat, Smart hub or speaker",
+      "base_price": 200,
+      "image": "https://media.istockphoto.com/id/1371990418/es/vector/electricistas-profesionales-en-el-trabajo-concepto-abstracto.jpg?s=612x612&w=0&k=20&c=vDSH3QS7t4oUyX8Y5UimQSORRUzIdHOxoKDcMAldODU="
+    },
+    {
+      "id": "07",
+      "name": "iPhone repair",
+      "description": "LCD install, Battery replacement",
+      "base_price": 200,
+      "image": "https://img.freepik.com/free-vector/product-teardown-concept-illustration_114360-1240.jpg?t=st=1750417841~exp=1750421441~hmac=22d3fc80f064f6ba38e89085c1bb12f635b0fcad7e5f964d58a169030f7755c7&w=1380"
     }
   ],
   "bookings": [
     {
-      "id": "booking-0001",
+      "id": "1",
       "customer_id": "1",
       "technician_id": "2",
       "service_id": "01",
@@ -99,12 +217,12 @@
       "name": "Reparación de Lavadora",
       "description": "Diagnóstico y reparación de lavadoras.",
       "type": "Home Appliances",
-      "status": "new",
+      "status": "nuevo",
       "startTime": "2025-07-01T08:00:00Z",
       "endTime": "2025-07-01T12:00:00Z"
     },
     {
-      "id": "booking-0002",
+      "id": "2",
       "customer_id": "1",
       "technician_id": "2",
       "service_id": "02",
@@ -113,9 +231,23 @@
       "name": "Reparación de Refrigeradora",
       "description": "Diagnóstico y reparación de refrigeradoras.",
       "type": "TV Mounting",
-      "status": "confirmed",
+      "status": "confrimado",
       "startTime": "2025-08-01T08:00:00Z",
       "endTime": "2025-08-01T12:00:00Z"
+    },
+    {
+      "id": "3",
+      "customer_id": "4",
+      "technician_id": "2",
+      "service_id": "02",
+      "address_id": "001",
+      "scheduled_time": "2025-06-21T22:00:00.000Z",
+      "name": "Home Appliances",
+      "description": "Lavadora saca mucha pelusa necesita mantenimiento",
+      "type": "Home Services",
+      "status": "nuevo",
+      "startTime": "2025-06-21T22:00:00.000Z",
+      "endTime": "2025-06-22T00:00:00.000Z"
     }
   ],
   "payments": [
@@ -132,8 +264,8 @@
     {
       "id": "review-001",
       "booking_id": "booking-0001",
-      "technician_id": "2b3c4d5e-1111-2222-3333-444455556666",
-      "customer_id": "1a2b3c4d-0000-1111-2222-333344445555",
+      "technician_id": "2",
+      "customer_id": "1",
       "rating": 5,
       "comments": "Servicio excelente y puntual.",
       "created_at": "2025-06-02T12:00:00Z"

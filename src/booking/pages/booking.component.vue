@@ -6,7 +6,7 @@ import axios from "axios";
 import { useToast } from 'primevue/usetoast';
 
 export default {
-  name: 'BookServicePage',
+  name: 'Booking',
   components: {
     InputText,
     Textarea,
@@ -25,17 +25,38 @@ export default {
     const image = ref(null);
 
     const technicians = ref([]);
+    const reviews = ref([]);
     const filteredTechnicians = ref([]);
     const selectedTechnician = ref(null);
 
     const toast = useToast();
 
+    const user = ref(null);
+
+    const getAverageRating = (technicianId) => {
+      const techReviews = reviews.value.filter(r => r.technician_id === technicianId);
+      if (techReviews.length === 0) return 0;
+
+      const total = techReviews.reduce((sum, r) => sum + r.rating, 0);
+      return total / techReviews.length;
+    };
+
     onMounted(async () => {
       try {
-        const response = await axios.get('http://localhost:3000/technicians');
-        technicians.value = response.data;
-        filteredTechnicians.value = technicians.value.filter(tech =>
-            tech.services.includes(category.value)
+        const storedUser = localStorage.getItem("user");
+        if (storedUser) {
+          user.value = JSON.parse(storedUser);
+        }
+
+        const response = await axios.get('http://localhost:3000/users');
+        const allUsers = response.data;
+        technicians.value = allUsers.filter(u => u.role === 'technician');
+
+        const reviewsResponse = await axios.get('http://localhost:3000/reviews');
+        reviews.value = reviewsResponse.data;
+
+        filteredTechnicians.value = technicians.value.filter(
+            tech => tech.specialty === category.value
         );
       } catch (error) {
         console.error('Error al cargar técnicos:', error);
@@ -44,6 +65,16 @@ export default {
 
     const handleImageUpload = (event) => {
       const file = event.files[0];
+      if (!file || !file.type.startsWith("image/")) {
+        toast.add({
+          severity: 'warn',
+          summary: 'Archivo inválido',
+          detail: 'Solo se permiten imágenes.',
+          life: 3000
+        });
+        return;
+      }
+
       const reader = new FileReader();
       reader.onload = () => {
         image.value = reader.result;
@@ -62,19 +93,27 @@ export default {
         return;
       }
 
+      const scheduledDateTime = new Date(date.value);
+      const [hour, minute] = time.value.split(':');
+      scheduledDateTime.setHours(parseInt(hour), parseInt(minute));
+
       const booking = {
+        customer_id: user.value.id,
+        technician_id: selectedTechnician.value.id,
+        service_id: category.value,
+        address_id: user.value.address_id || 'unknown',
+        scheduled_time: scheduledDateTime.toISOString(),
         name: name.value,
-        category: category.value,
-        technician: selectedTechnician.value,
-        details: details.value,
-        image: image.value,
-        date: date.value,
-        time: time.value,
-        status: "Esperando"
+        description: details.value,
+        type: "Home Services",
+        status: "new",
+        startTime: scheduledDateTime.toISOString(),
+        endTime: new Date(scheduledDateTime.getTime() + 2 * 60 * 60 * 1000).toISOString(),
+        image: image.value
       };
 
       try {
-        await axios.post('http://localhost:3000/scheduledServices', booking);
+        await axios.post('http://localhost:3000/bookings', booking);
         toast.add({
           severity: 'success',
           summary: 'Reserva confirmada',
@@ -102,7 +141,10 @@ export default {
       selectedTechnician,
       filteredTechnicians,
       handleImageUpload,
-      confirmBooking
+      confirmBooking,
+      user,
+      getAverageRating,
+      reviews
     };
   }
 };
@@ -111,8 +153,8 @@ export default {
 <template>
   <div class="booking-container">
     <h2>Reserva de Servicio</h2>
-    <p>Servicio: <strong>{{ category }}</strong></p>
-    <p>Cliente: {{ name }}</p>
+    <p>Servicio: <strong>{{ name }}</strong></p>
+    <p v-if="user">Cliente: <strong>{{ user.name }}</strong></p>
 
     <h3>Técnicos Disponibles</h3>
     <div class="technician-list">
@@ -120,11 +162,11 @@ export default {
           v-for="tech in filteredTechnicians"
           :key="tech.name"
           class="technician-item"
-          :class="{ selected: tech.name === selectedTechnician }"
-          @click="selectedTechnician = tech.name"
+          :class="{ selected: tech === selectedTechnician }"
+          @click="selectedTechnician = tech"
       >
         <span>{{ tech.name }}</span>
-        <Rating :modelValue="tech.rating" readonly :cancel="false" />
+        <Rating :modelValue="getAverageRating(tech.id)" readonly :cancel="false" />
       </div>
     </div>
 
@@ -132,7 +174,19 @@ export default {
     <Textarea v-model="details" rows="4" cols="30" placeholder="Describe el problema..." />
 
     <h3>Subir Imagen</h3>
-    <FileUpload mode="basic" auto chooseLabel="Subir" customUpload @uploader="handleImageUpload" />
+    <FileUpload
+        mode="basic"
+        auto
+        chooseLabel="Seleccionar Imagen"
+        accept="image/*"
+        customUpload
+        @uploader="handleImageUpload"
+    />
+
+    <div v-if="image" class="image-preview">
+      <h4>Vista previa:</h4>
+      <img :src="image" alt="Imagen del dispositivo" width="200" />
+    </div>
 
     <div class="datetime-section">
       <div>
@@ -141,7 +195,7 @@ export default {
       </div>
       <div>
         <label>Hora:</label>
-        <InputText v-model="time" placeholder="Ej. 17:00" />
+        <input type="time" v-model="time" class="p-inputtext" />
       </div>
     </div>
 
@@ -211,4 +265,10 @@ export default {
   color: white;
   font-weight: bold;
 }
+
+.image-preview {
+  margin-top: 1rem;
+  text-align: center;
+}
+
 </style>

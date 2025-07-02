@@ -93,17 +93,17 @@ export default {
     <div class="logo-container">
       <img src="/logo-producto.png" alt="Logo" class="logo" />
       <h1>RepairLink</h1>
-      <p class="tagline">Your go-to home care experts</p>
+      <p class="tagline">Tus expertos en atención domiciliaria</p>
     </div>
 
     <div class="button-group">
       <Card class="login-card">
-        <template #title>Login</template>
+        <template #title>Inicio de sesión</template>
         <template #content>
           <div class="p-fluid">
             <div class="field">
               <label for="username">E-mail</label>
-              <InputText id="username" v-model="email" placeholder="Enter your email" />
+              <InputText id="username" v-model="email" placeholder="Ingresa tu email" />
             </div>
             <div class="field">
               <label for="password">Password</label>
@@ -112,23 +112,23 @@ export default {
                   v-model="password"
                   toggleMask
                   :feedback="false"
-                  placeholder="Enter your password"
+                  placeholder="Ingresa tu contraseña"
                   style="border: 1px black solid; border-radius: 4px"
                   :input-style="{ background: 'white', color: 'black', border: 'white' }"
               />
             </div>
             <Button
-                label="Login"
+                label="Iniciar sesión"
                 icon="pi pi-sign-in"
                 class="p-button-primary p-mt-3"
                 @click="login"
             />
             <div class="signup-message">
               <span>
-                Don't have an account?<br /><br />
-                <router-link to="/signup-customer">Sign Up for Customers</router-link>
+                ¿No tienes una cuenta?<br /><br />
+                <router-link to="/signup-customer">Crear cuenta como Cliente</router-link>
                 <br /><br />
-                <router-link to="/signup-technician">Sign Up for Technicians</router-link>
+                <router-link to="/signup-technician">Crear cuenta como Técnico</router-link>
               </span>
             </div>
 

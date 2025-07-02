@@ -19,7 +19,7 @@ onMounted(() => {
 <template>
   <div style="font-family: Roboto, sans-serif; max-width: 900px; margin: auto; padding: 10px;">
     <div style="text-align: left; color: #8da8ff; font-weight: 600; margin-bottom: 10px;">
-      Hello, {{ user.name  }}
+      Hola, {{ user.name  }}
     </div>
     <CustomerHome v-if="user.role === 'customer'" />
     <TechnicianHome v-else-if="user.role === 'technician'" />

@@ -7,27 +7,25 @@ export class User {
                     name = '',
                     email = '',
                     password = '',
-                    phone = '',
-                    avatar = '',
-                    address_id = '',
                     role = '',
-                    skills = '',
-                    createdAt = '',
-                    updatedAt = '',
+                    phone = '',
+                    address_id = '',
+                    specialty = '',
+                    skills = [],
+                    background_check = false,
+                    documents = []
                 }) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.phone = phone;
-        this.avatar = avatar;
-        this.address_id = address_id;
         this.role = role;
+        this.phone = phone;
+        this.address_id = address_id;
+        this.specialty = specialty;
         this.skills = skills;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.background_check = background_check;
+        this.documents = documents;
     }
 }
-
-
 

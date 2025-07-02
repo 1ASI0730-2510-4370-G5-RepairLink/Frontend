@@ -7,6 +7,7 @@ import {createRouter, createWebHistory} from "vue-router";
 import signupCustomerComponent from "@/userManagement/pages/signup-customer.component.vue";
 import SignupCustomerComponent from "@/userManagement/pages/signup-customer.component.vue";
 import SignupTechinicianNextStepComponent from "@/userManagement/pages/signup-techinician-next-step.component.vue";
+import BookingComponent from "@/booking/pages/booking.component.vue";
 
 /**
  * @description Lazy-loaded component imports for route configuration
@@ -38,6 +39,7 @@ const routes = [
     {   path: '/signup-technician',                  name: 'signup-technician',       component: SignupTechinicianNextStepComponent,               meta: {title: 'SignUpTechnician'}},
     {   path: '/home',                  name: 'home',       component: HomeComponent,               meta: {title: 'Home'}},
     {   path: '/booking/:id',           name: 'booking-details',       component: BookingDetailsComponent, props: true,  meta: {title: 'Booking Details'}},
+    {   path: '/booking/',           name: 'booking',       component: BookingComponent, props: true,  meta: {title: 'New Booking'}},
     {   path: '/profile',                  name: 'profile',       component: ProfileComponent,               meta: {title: 'Profile'}},
     {   path: '/my-services',                  name: 'my-services',       component: MyServicesComponent,               meta: {title: 'My Services'}},
     {   path: '/notifications',                  name: 'notifications',       component: NotificationsComponent,               meta: {title: 'Notifications'}},

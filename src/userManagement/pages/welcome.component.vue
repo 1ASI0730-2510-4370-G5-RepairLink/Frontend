@@ -21,18 +21,18 @@ export default {
   <div class="login-container">
     <div class="logo-container">
       <img src="/logo-producto.png" alt="Logo" class="logo" />
-      <h1>Welcome to RepairLink</h1>
-      <p class="tagline">Your go-to home care experts</p>
+      <h1>Bienvenido a RepairLink</h1>
+      <p class="tagline">Tus expertos en atención domiciliaria</p>
     </div>
 
     <div class="button-group">
       <Button
-          label="I'm a Customer"
+          label="Ingresar como cliente"
           class="p-button-rounded p-button-lg role-button customer-button"
           @click="navigateToCustomerLogin"
       />
       <Button
-          label="I'm a Technician"
+          label="Ingresar como técnico"
           class="p-button-rounded p-button-lg role-button technician-button"
           @click="navigateToTechnicianLogin"
       />

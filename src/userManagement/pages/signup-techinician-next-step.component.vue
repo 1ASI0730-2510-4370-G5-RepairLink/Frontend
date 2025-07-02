@@ -3,172 +3,180 @@
     <div v-if="step === 1" class="skills-selection">
       <div class="header">
         <img src="/logo-producto.png" alt="RepairLink Logo" class="logo" />
-        <h2>Welcome! Select your speciality below to get started</h2>
+        <h2>¡Bienvenido! Selecciona tu especialidad a continuación para comenzar</h2>
       </div>
 
       <div class="skills-grid">
         <label class="skill-option">
           <input type="checkbox" v-model="formData.skills" value="Appliance Repair" hidden />
           <img src="@/assets/appliance-repair.png" alt="Appliance Repair" />
-          <span>Appliance Repair</span>
+          <span>Reparación de electrodomésticos</span>
         </label>
 
         <label class="skill-option">
           <input type="checkbox" v-model="formData.skills" value="Plumbing" hidden />
           <img src="@/assets/plumbing.png" alt="Plumbing" />
-          <span>Plumbing</span>
+          <span>Servicio de gasfiteria</span>
         </label>
 
         <label class="skill-option">
           <input type="checkbox" v-model="formData.skills" value="TV Mounting" hidden />
           <img src="@/assets/tv-mounting.png" alt="TV Mounting" />
-          <span>TV Mounting</span>
+          <span>Montaje de TV</span>
         </label>
 
         <label class="skill-option">
           <input type="checkbox" v-model="formData.skills" value="Handyman" hidden />
           <img src="@/assets/handyman.png" alt="Handyman" />
-          <span>Handyman</span>
+          <span>Servicios generales</span>
         </label>
       </div>
 
       <div class="button-group">
-        <button @click="prevStep">Back</button>
-        <button @click="nextStep" :disabled="formData.skills.length === 0">Next</button>
+        <button @click="prevStep">Anterior</button>
+        <button @click="nextStep" :disabled="formData.skills.length === 0">Siguiente</button>
       </div>
     </div>
 
     <div v-if="step === 2" class="about-you-form">
       <div class="step-header">
-        <span :class="{'active-step': true}">1 About you</span>
-        <span>➤ 2 Skills assessment</span>
-        <span>➤ 3 Background check</span>
+        <span :class="{'active-step': true}">1 Acerca de ti</span>
+        <span>➤ 2 Evaluación de habilidades</span>
+        <span>➤ 3 Verificación de antecedentes</span>
       </div>
 
       <form @submit.prevent="nextStep">
         <div class="form-group">
-          <label>Full name</label>
+          <label>Nombre completo</label>
           <input v-model="formData.fullName" type="text" required />
         </div>
 
         <div class="form-group">
-          <label>Email address</label>
+          <label>Correo electrónico</label>
           <input v-model="formData.email" type="email" required />
         </div>
 
         <div class="form-group">
-          <label>Confirm email</label>
+          <label>Confirmar correo electrónico</label>
           <input v-model="formData.confirmEmail" type="email" required />
         </div>
 
         <div class="form-group">
-          <label>Mobile number</label>
+          <label>Número de celular</label>
           <input v-model="formData.phone" type="tel" required />
         </div>
 
         <div class="form-group">
-          <label>Address</label>
+          <label>Dirección</label>
           <input v-model="formData.address" type="text" />
         </div>
 
         <div class="form-group">
-          <label>What city do you wish to work in?</label>
+          <label>¿En qué ciudad deseas trabajar?</label>
           <input v-model="formData.city" type="text" />
         </div>
 
         <div class="form-group">
-          <label>Do you have your own mode of transportation?</label>
-          <label><input type="radio" v-model="formData.transportation" value="yes" /> Yes</label>
+          <label>¿Tienes tu propio medio de transporte?</label>
+          <label><input type="radio" v-model="formData.transportation" value="yes" /> Si</label>
           <label><input type="radio" v-model="formData.transportation" value="no" /> No</label>
         </div>
 
         <div class="form-group">
-          <label>Do you have liability insurance coverage as a service provider?</label>
-          <label><input type="radio" v-model="formData.insurance" value="yes" /> Yes</label>
+          <label>¿Cuentas con seguro de responsabilidad civil como proveedor de servicios?</label>
+          <label><input type="radio" v-model="formData.insurance" value="yes" /> Si</label>
           <label><input type="radio" v-model="formData.insurance" value="no" /> No</label>
         </div>
 
         <div class="form-group">
-          <label>Do you own a company with more than 2 technicians?</label>
-          <label><input type="radio" v-model="formData.hasCompany" value="yes" /> Yes</label>
+          <label>¿Eres propietario de una empresa con más de 2 técnicos?</label>
+          <label><input type="radio" v-model="formData.hasCompany" value="yes" /> Si</label>
           <label><input type="radio" v-model="formData.hasCompany" value="no" /> No</label>
         </div>
 
         <div class="form-group">
-          <label>Select your amount of experience</label>
+          <label>Selecciona tu nivel de experiencia</label>
           <select v-model="formData.experience">
-            <option>No experience</option>
-            <option>1-2 years</option>
-            <option>3-5 years</option>
-            <option>More than 5 years</option>
+            <option>No experiencia</option>
+            <option>1-2 años</option>
+            <option>3-5 años</option>
+            <option>Más de 5 años</option>
           </select>
         </div>
 
         <div class="button-group">
-          <button @click="prevStep" type="button">Back</button>
-          <button type="submit">Next</button>
+          <button @click="prevStep" type="button">Anterior</button>
+          <button type="submit">Siguiente</button>
         </div>
       </form>
     </div>
 
     <div v-if="step === 3" class="skills-assessment">
       <div class="step-header">
-        <span>➤ 1 About you</span>
-        <span :class="{'active-step': true}">2 Skills assessment</span>
-        <span>➤ 3 Background check</span>
+        <span>➤ 1 Acerca de ti</span>
+        <span :class="{'active-step': true}">2 Evaluación de habilidades</span>
+        <span>➤ 3 Verificación de antecedentes</span>
       </div>
 
       <form @submit.prevent="nextStep">
         <div class="form-group">
-          <label>What types of jobs would you like to see?</label>
-          <label>Select from the list below the devices or skills you have experience working with</label>
+          <label>¿Qué trabajos prefieres que te mostremos?</label>
+          <label> Selecciona de la lista los dispositivos o habilidades con los que tienes experiencia.</label>
         </div>
 
         <div class="form-group">
-          <label><input type="checkbox" v-model="formData.jobTypes" value="Washing Machines" /> Washing Machines</label>
-          <label><input type="checkbox" v-model="formData.jobTypes" value="Refrigerators" /> Refrigerators</label>
-          <label><input type="checkbox" v-model="formData.jobTypes" value="Microwaves" /> Microwaves</label>
-          <label><input type="checkbox" v-model="formData.jobTypes" value="Dishwashers" /> Dishwashers</label>
-          <label><input type="checkbox" v-model="formData.jobTypes" value="TV Mounting" /> TV Mounting</label>
-          <label><input type="checkbox" v-model="formData.jobTypes" value="Faucet Repair" /> Faucet Repair</label>
-          <label><input type="checkbox" v-model="formData.jobTypes" value="Other" /> Other</label>
+          <label><input type="checkbox" v-model="formData.jobTypes" value="Washing Machines" /> Lavadoras</label>
+          <label><input type="checkbox" v-model="formData.jobTypes" value="Refrigerators" /> Refrigeradoras</label>
+          <label><input type="checkbox" v-model="formData.jobTypes" value="Microwaves" /> Microondas</label>
+          <label><input type="checkbox" v-model="formData.jobTypes" value="Dishwashers" /> Lavavajillas</label>
+          <label><input type="checkbox" v-model="formData.jobTypes" value="TV Mounting" /> Instalación de TV en la pared</label>
+          <label><input type="checkbox" v-model="formData.jobTypes" value="Faucet Repair" /> Reparación de grifos</label>
+          <label><input type="checkbox" v-model="formData.jobTypes" value="Other" /> Otros</label>
         </div>
 
         <div class="button-group">
-          <button @click="prevStep" type="button">Back</button>
-          <button type="submit">Next</button>
+          <button @click="prevStep" type="button">Anterior</button>
+          <button type="submit">Siguiente</button>
         </div>
       </form>
     </div>
 
     <div v-if="step === 4" class="background-check">
       <div class="step-header">
-        <span>➤ 1 About you</span>
-        <span>➤ 2 Background check</span>
-        <span :class="{'active-step': true}">3 Background check</span>
+        <span>➤ 1 Acerca de ti</span>
+        <span>➤ 2 Evaluación de habilidades</span>
+        <span :class="{'active-step': true}">3 Verificación de antecedentes</span>
       </div>
       <form @submit.prevent="submitForm">
         <input type="file" @change="handleFileUpload" />
-        <div v-if="!formData.documents" class="error-message">Please upload your background check document.</div>
-        <button type="submit" :disabled="!formData.documents">Submit</button>
+        <div v-if="!formData.documents" class="error-message">Por favor cargue su documento de verificación de antecedentes.</div>
+        <button type="submit" :disabled="!formData.documents">Enviar</button>
       </form>
-      <button @click="prevStep">Back</button>
-      <button @click="stepSave">Save</button>
+      <button @click="prevStep">Anterior</button>
     </div>
   </div>
 </template>
 
 <script>
+import { User } from '@/userManagement/model/user.entity.js';
+import { UserService } from '@/userManagement/services/user.service.js';
+
+const userService = new UserService();
+
 export default {
   name: 'SignUpPage-Technician-Next-Step',
   data() {
     return {
       step: 1,
       formData: {
-        about: '',
+        name: '',
+        email: '',
+        password: '',
+        phone: '',
+        specialty: '',
         skills: [],
-        jobTypes: [],
-        documents: null
+        background_check: false,
+        documents: [],
       }
     };
   },
@@ -189,8 +197,33 @@ export default {
       }
     },
     submitForm() {
-      console.log('Form Submitted:', this.formData);
-      alert('Form Submitted!');
+      if (!this.formData.documents || this.formData.documents.length === 0) {
+        alert('Debes adjuntar al menos un documento.');
+        return;
+      }
+
+      const newUser = new User({
+        name: this.formData.name,
+        email: this.formData.email,
+        password: this.formData.password,
+        role: 'technician', // o 'customer', depende del flujo
+        phone: this.formData.phone,
+        address_id: this.formData.address_id || '', // si lo tienes
+        specialty: this.formData.specialty,
+        skills: this.formData.skills,
+        background_check: this.formData.background_check,
+        documents: this.formData.documents,
+      });
+
+      userService.create(newUser)
+          .then(() => {
+            alert('Registro exitoso');
+            this.$router.push('/login');
+          })
+          .catch(err => {
+            console.error('Error al registrar usuario:', err);
+            alert('Ocurrió un error al guardar el usuario');
+          });
     }
   }
 };
