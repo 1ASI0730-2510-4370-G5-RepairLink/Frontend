@@ -33,7 +33,7 @@
             @click="navigateToCustomerLogin"
         />
         <Button
-            label="I'm a Technician"
+            label="I'm a Technician222"
             class="p-button-rounded p-button-lg role-button technician-button"
             @click="navigateToTechnicianLogin"
         />
